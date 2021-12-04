@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search Groups
+{% endblock %}
+
+{% block main %}
+    <form action="/search" method="post">
+        <div class="form-group">
+            <label for="groupName">参加したいグループ名を入力してください</label>
+            <input class="form-control" name="groupName" id="groupName" placeholder="グループ名" type="text"  autocomplete="off" autofocus required>
+        </div>
+        <button type="submit" class="btn btn-info btn-lg" onclick="return confirm('このグループに参加しますか？');">検索</button>
+    </form>
+{% endblock %}

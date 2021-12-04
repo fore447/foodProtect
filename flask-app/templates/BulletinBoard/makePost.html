@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Make Posts
+{% endblock %}
+
+{% block main %}
+    <form action="/post" method="post" enctype=multipart/form-data>
+        <div class="form-group">
+            <label for="groupName">投稿するグループを選択</label><br>
+            <select name="groupName" id="groupName" autofocus required>
+                <option value="" disabled selected>グループ</option>
+                {% for group in groups %}
+                    <option value="{{ group["group_name"] }}">{{ group["group_name"] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="productName">商品名</label>
+            <input type="text" class="form-control" id="productName" name="productName" value="{{ request.form["productName"] }}" placeholder="商品名" autocomplete="off" required>
+        </div>
+        <div class="form-group">
+            <label for="comment">コメント</label>
+            <textarea class="form-control" id="comment" name="comment" rows="3" autocomplete="off" required>{{ request.form["comment"] }}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="productImage">商品画像</label><br>
+            <input type="file" id="productImage" name="image" size="30" accept=".png, .jpeg, .jpg">
+        </div>
+        <button type="submit" class="btn btn-info btn-lg">投稿</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,13 @@
+h3 {
+    display: inline-block;
+    border-bottom: double 5px #ffbe69;
+}
+
+nav {
+    background-color: #ffbe69;
+}
+
+.btn-center
+{
+    text-align:center;
+}

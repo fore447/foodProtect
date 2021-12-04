@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {% if groupName %}
+        Group's Posts
+    {% else %}
+        My Posts
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    {% if groupName %}
+        <h3>{{ groupName }}への投稿</h3>
+    {% else %}
+        <h3>あなたの投稿</h3>
+    {% endif %}
+    
+    {% if not posts %}
+        <h5>現在投稿はありません</h5>
+    {% endif %}
+    
+    
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-6 col-lg-4 p-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <img class="card-img-top " src="{{ post["food_image"] }}" alt="">
+                    <h5 class="card-title">{{ post["food_name"] }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">投稿者：@{{ post["username"] }}</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">投稿日時：{{ post["posted_at"] }}</h6>
+                    <p>コメント：{{ post["comment"] }}</p>
+                </div>
+                {% if session["user_id"] == post["poster_id"] %}
+                    <div class="card-footer">
+                        <form action="{{ url_for("postDelete", id=post["id"]) }}" method="post">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('本当に削除してよろしいですか？');">削除</button>
+                        </form>
+                    </div>
+                {% endif %} 
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

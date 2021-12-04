@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Groups List
+{% endblock %}
+
+{% block main %}
+    <h3>参加グループ一覧</h3>
+    {% if not groups %}
+        <h5>現在参加しているグループはありません</h5>
+    {% else %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">グループ名</th>
+                    <th scope="col">作成者</th>
+                    <th scope="col">作成日時</th>
+                    <th scope="col">その他</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for group in groups %}
+                <tr>
+                    <th scope="row">{{ group["group_name"] }}</th>
+                    <td>@{{ group["creator"] }}</td>
+                    <td>{{ group["made_at"] }}</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <form action="{{ url_for('groupPosts', id=group['id']) }}" method="post">
+                                <button type="submit" class="btn btn-primary mr-1">投稿一覧</button>
+                            </form>
+                            {% if session["user_id"] == group["creator_id"] %}
+                            <form action="{{ url_for('groupDelete', id=group['id']) }}" method="post">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('グループ内の投稿も削除されますがよろしいですか？');">グループ削除</button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    
+{% endblock %}
