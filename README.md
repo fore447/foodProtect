@@ -60,9 +60,5 @@ def allowed_file(filename)は、アップロードされたファイルの拡張
  def login_required (f) is a function that requires you to log in if you are not logged in.
  def allowed_file (filename) is a function that checks if the extension of the uploaded file is allowed by this app.)
 
-##### foodProtect.db
-アプリケーションで利用するデータを保存するデータベースです。画像については、ファイルパスのみを保存しています。
-(A database that stores data used by applications. For images, only the file path is saved.)
-
 ### Technology used
 CS50 IDE, HTML, CSS, Bootstrap, flask, SQLite
